@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <title>Café Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Docsify core -->
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
   </head>
   <body>
     <div id="app">Loading Café Docs...</div>
+
+    <!-- Configuration must come BEFORE the script -->
     <script>
       window.$docsify = {
         name: 'Café Documentation',
@@ -17,5 +17,8 @@
         repo: ''
       }
     </script>
+
+    <!-- Docsify script (make sure this is last) -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
   </body>
 </html>
