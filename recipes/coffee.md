@@ -33,3 +33,10 @@
     <td style="background-color: #ffc7ce;">Needs Refill</td>
   </tr>
 </table>
+
+| Drink | Status |
+|-------|---------|
+| Espresso | <span style="background-color:#c6efce;">Ready</span> |
+| Latte | <span style="background-color:#ffeb9c;">In Progress</span> |
+| Mocha | <span style="background-color:#ffc7ce;">Needs Refill</span> |
+
