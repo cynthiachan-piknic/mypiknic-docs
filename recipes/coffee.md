@@ -1,4 +1,6 @@
-<img src="https://github.com/cynthiachan-piknic/mypiknic-docs/blob/f0f11d6112aca3cb60b1a9e22a765f01d5b6772a/logo.png" width="110">
+<img src="https://raw.githubusercontent.com/cynthiachan-piknic/mypiknic-docs/main/logo.png" width="110">
+
+<i>↓ Recipe Steps</i>
 
 # ☕ Traditional Coffees
 
@@ -9,34 +11,13 @@
 
 # ☕ White Coffees
 
-| Left columns  | Right columns |
-| ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
-
 <table>
-  <tr>
-    <th>Drink</th>
-    <th>Status</th>
-  </tr>
-  <tr>
-    <td style="background-color: #c6efce;">Espresso</td>
-    <td style="background-color: #c6efce;">Ready</td>
-  </tr>
-  <tr>
-    <td style="background-color: #ffeb9c;">Latte</td>
-    <td style="background-color: #ffeb9c;">In Progress</td>
-  </tr>
-  <tr>
-    <td style="background-color: #ffc7ce;">Mocha</td>
-    <td style="background-color: #ffc7ce;">Needs Refill</td>
-  </tr>
+<tbody>
+<tr>
+<td>123</td>
+<td>&nbsp;</td>
+<td>456</td>
+</tr>
+</tbody>
 </table>
-
-| Drink | Status |
-|-------|---------|
-| Espresso | <span style="background-color:#c6efce;">Ready</span> |
-| Latte | <span style="background-color:#ffeb9c;">In Progress</span> |
-| Mocha | <span style="background-color:#ffc7ce;">Needs Refill</span> |
 
