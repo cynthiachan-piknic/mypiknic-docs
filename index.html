@@ -115,4 +115,15 @@
         }
 
         sendBtn.addEventListener('click', sendPrompt);
-        input.addEventListener('keydown', (e) =
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendPrompt(); });
+
+        // Helpful starter example when panel opens
+        toggle.addEventListener('click', () => {
+          if (panel.style.display === 'block' && messagesEl.childElementCount === 0) {
+            addMessage('AI', 'Hi — ask me to create templates, update _sidebar.md, or generate a new Markdown file. Example: "Create a recipe template for smoothies with allergen note."');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
