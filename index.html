@@ -21,6 +21,14 @@
     z-index: 9999;
   }
 
+   .markdown-section th,
+  .markdown-section td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    text-align: left !important; /* 👈 keeps all cells left-aligned */
+    vertical-align: top;          /* 👈 multi-line text stays neat */
+  }
+
   /* --- Push content down below header/logo --- */
   #app,
   .content,
