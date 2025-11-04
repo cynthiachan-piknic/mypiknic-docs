@@ -2,13 +2,117 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>My Piknic Cafe</title>
+    <title>☕ Cafe Docs + AI Builder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-  </head>
-  <body>
-    <div id="app">Loading Piknic Docs...</div>
 
+    <!-- Docsify -->
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  </body>
-</html>
+
+    <!-- Simple theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+
+    <style>
+      /* Small custom styles for the chat panel */
+      #cafe-ai-panel { display:none; width:360px; height:480px; position:fixed; right:18px; bottom:18px; z-index:9999; border-radius:10px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.2); font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+      #cafe-ai-header { background:#6b4e3d; color:#fff; padding:10px 12px; font-weight:600; }
+      #cafe-ai-messages { height:360px; overflow:auto; padding:12px; background:#fff;}
+      #cafe-ai-input { width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; box-sizing:border-box; }
+      #cafe-ai-send { background:#6b4e3d; color:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+      .cafe-msg { margin-bottom:12px; }
+      .cafe-msg .who { font-weight:600; font-size:13px; margin-bottom:4px; }
+      .cafe-ai-footer { padding:10px; border-top:1px solid #eee; background:#fafafa; display:flex; gap:8px; }
+      #cafe-ai-toggle { position:fixed; right:18px; bottom:18px; z-index:9998; background:#6b4e3d; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.16); }
+    </style>
+
+    <script>
+      window.$docsify = {
+        name: '☕ Cafe Docs + AI Builder',
+        loadSidebar: true,
+        subMaxLevel: 2,
+        repo: ''
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="app">Loading Café Docs...</div>
+
+    <!-- AI toggle button -->
+    <div id="cafe-ai-toggle" title="Open AI Builder">AI Builder</div>
+
+    <!-- Chat panel -->
+    <div id="cafe-ai-panel" role="dialog" aria-label="AI Builder Panel">
+      <div id="cafe-ai-header">AI Builder — Ask to create or modify docs</div>
+      <div id="cafe-ai-messages" aria-live="polite"></div>
+
+      <div class="cafe-ai-footer">
+        <input id="cafe-ai-input" placeholder="e.g. Create a recipe template for smoothies" />
+        <button id="cafe-ai-send">Send</button>
+      </div>
+    </div>
+
+    <!-- Client-side logic: sends requests to /api/dev -->
+    <script>
+      (function(){
+        const toggle = document.getElementById('cafe-ai-toggle');
+        const panel = document.getElementById('cafe-ai-panel');
+        const messagesEl = document.getElementById('cafe-ai-messages');
+        const input = document.getElementById('cafe-ai-input');
+        const sendBtn = document.getElementById('cafe-ai-send');
+
+        function addMessage(who, text) {
+          const wrap = document.createElement('div');
+          wrap.className = 'cafe-msg';
+          const whoEl = document.createElement('div');
+          whoEl.className = 'who';
+          whoEl.textContent = who;
+          const textEl = document.createElement('div');
+          // simple formatting of code blocks
+          textEl.innerHTML = text
+            .replace(/```([^\n]*)\n([\s\S]*?)```/g, function(m,lang,code){
+              return '<pre><code>' + code.replace(/</g,'&lt;') + '</code></pre>';
+            })
+            .replace(/\n/g,'<br/>');
+          wrap.appendChild(whoEl);
+          wrap.appendChild(textEl);
+          messagesEl.appendChild(wrap);
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        toggle.onclick = () => {
+          panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+        };
+
+        async function sendPrompt() {
+          const prompt = input.value.trim();
+          if (!prompt) return;
+          addMessage('You', prompt);
+          input.value = '';
+          addMessage('AI', '…thinking');
+          try {
+            const resp = await fetch('/api/dev', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({ prompt })
+            });
+            const data = await resp.json();
+            // remove last "thinking" entry
+            const last = messagesEl.lastChild;
+            if (last && last.innerText.includes('…thinking')) last.remove();
+            if (data?.reply) {
+              addMessage('AI', data.reply);
+            } else if (data?.error) {
+              addMessage('AI', 'Error: ' + data.error);
+            } else {
+              addMessage('AI', 'No reply from server.');
+            }
+          } catch (err) {
+            const last = messagesEl.lastChild;
+            if (last && last.innerText.includes('…thinking')) last.remove();
+            addMessage('AI', 'Network or server error.');
+            console.error(err);
+          }
+        }
+
+        sendBtn.addEventListener('click', sendPrompt);
+        input.addEventListener('keydown', (e) =
