@@ -2,194 +2,34 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>☕ Cafe Docs + AI Builder</title>
+    <title>Café Documentation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Docsify -->
-    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-    <!-- Simple theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-
     <style>
-      /* Small custom styles for the chat panel */
-      #cafe-ai-panel { display:none; width:360px; height:480px; position:fixed; right:18px; bottom:18px; z-index:9999; border-radius:10px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.2); font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-      #cafe-ai-header { background:#6b4e3d; color:#fff; padding:10px 12px; font-weight:600; }
-      #cafe-ai-messages { height:360px; overflow:auto; padding:12px; background:#fff;}
-      #cafe-ai-input { width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; box-sizing:border-box; }
-      #cafe-ai-send { background:#6b4e3d; color:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-      .cafe-msg { margin-bottom:12px; }
-      .cafe-msg .who { font-weight:600; font-size:13px; margin-bottom:4px; }
-      .cafe-ai-footer { padding:10px; border-top:1px solid #eee; background:#fafafa; display:flex; gap:8px; }
-      #cafe-ai-toggle { position:fixed; right:18px; bottom:18px; z-index:9998; background:#6b4e3d; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.16); }
-    </style>
+  :root {
+    --theme-color: #6b4e3d;   /* coffee brown */
+    --sidebar-width: 220px;
+    --base-font-family: 'Inter', sans-serif;
+  }
+</style>
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-darklight-theme.min.css">
 
+  </head>
+  <body>
+    <div id="app">Loading Café Docs...</div>
+
+    <!-- Configuration must come BEFORE the script -->
     <script>
       window.$docsify = {
-        name: '☕ Cafe Docs + AI Builder',
+        name: 'Café Documentation',
         loadSidebar: true,
         subMaxLevel: 2,
         repo: ''
       }
     </script>
-    
-<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-    
-  </head>
 
-  <body>
-    <div id="app">Loading Café Docs...</div>
-
-    <!-- AI toggle button -->
-    <div id="cafe-ai-toggle" title="Open AI Builder">AI Builder</div>
-
-    <!-- Chat panel -->
-    <div id="cafe-ai-panel" role="dialog" aria-label="AI Builder Panel">
-      <div id="cafe-ai-header">AI Builder — Ask to create or modify docs</div>
-      <div id="cafe-ai-messages" aria-live="polite"></div>
-
-      <div class="cafe-ai-footer">
-        <input id="cafe-ai-input" placeholder="e.g. Create a recipe template for smoothies" />
-        <button id="cafe-ai-send">Send</button>
-      </div>
-    </div>
-
-<!-- Add inside body, replacing previous AI panel if present -->
-<div id="cafe-ai-panel" style="display:none; width:420px; height:540px; position:fixed; right:18px; bottom:18px; z-index:9999; border-radius:10px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.2); font-family:system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;">
-  <div style="background:#6b4e3d; color:#fff; padding:12px; font-weight:600;">AI Builder — Preview & Apply</div>
-
-  <div id="cafe-ai-messages" style="height:360px; overflow:auto; padding:12px; background:#fff;"></div>
-
-  <div style="padding:10px; border-top:1px solid #eee; background:#fafafa;">
-    <input id="cafe-ai-input" placeholder="e.g. Create a recipe template for smoothies" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; box-sizing:border-box;" />
-    <div style="display:flex; gap:8px; margin-top:8px;">
-      <button id="cafe-ai-preview" style="flex:1; padding:8px; border-radius:6px; border:none; background:#2d7a5e; color:#fff; cursor:pointer;">Preview Changes</button>
-      <button id="cafe-ai-write" style="flex:1; padding:8px; border-radius:6px; border:none; background:#6b4e3d; color:#fff; cursor:pointer;" disabled>Create PR</button>
-    </div>
-    <div style="margin-top:8px; font-size:12px; color:#666;">After previewing, click <strong>Create PR</strong> to write the changes to GitHub (opens a PR).</div>
-  </div>
-</div>
-
-<script>
-(function(){
-  const toggle = document.getElementById('cafe-ai-toggle') || (() => {
-    const btn = document.createElement('div'); btn.id='cafe-ai-toggle'; btn.textContent='AI Builder'; 
-    btn.style = "position:fixed; right:18px; bottom:18px; z-index:9998; background:#6b4e3d; color:#fff; padding:10px 12px; border-radius:10px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.16);";
-    document.body.appendChild(btn);
-    return btn;
-  })();
-
-  const panel = document.getElementById('cafe-ai-panel');
-  const messagesEl = document.getElementById('cafe-ai-messages');
-  const input = document.getElementById('cafe-ai-input');
-  const previewBtn = document.getElementById('cafe-ai-preview');
-  const writeBtn = document.getElementById('cafe-ai-write');
-
-  let lastPreview = null; // store aiResult so we can send it back for apply
-
-  toggle.onclick = () => {
-    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-    if (panel.style.display === 'block' && messagesEl.childElementCount === 0) {
-      addMessage('AI','Hi — I can propose file edits. Type a request and click <strong>Preview Changes</strong>. Example: "Create docs/recipes/smoothie.md with a recipe and allergen note."');
-    }
-  };
-
-  function addMessage(who, text) {
-    const wrap = document.createElement('div');
-    wrap.style.marginBottom = '12px';
-    wrap.innerHTML = `<div style="font-weight:700; margin-bottom:6px">${who}</div><div style="white-space:pre-wrap">${text}</div>`;
-    messagesEl.appendChild(wrap);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-  }
-
-  async function preview() {
-    const prompt = input.value.trim();
-    if (!prompt) return;
-    addMessage('You', prompt);
-    addMessage('AI', '…generating preview (this may take a few seconds)');
-
-    previewBtn.disabled = true;
-    writeBtn.disabled = true;
-
-    try {
-      const resp = await fetch('/api/update', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ prompt, approve: false })
-      });
-      const data = await resp.json();
-      // remove the thinking message (last child)
-      if (messagesEl.lastChild && messagesEl.lastChild.innerText.includes('…generating preview')) messagesEl.lastChild.remove();
-
-      if (data?.preview && data.aiResult) {
-        lastPreview = data.aiResult; // save for apply
-        // Show each file content in the panel
-        const files = data.aiResult.files || [];
-        if (files.length === 0) {
-          addMessage('AI', 'No files were suggested. Try a clearer prompt.');
-        } else {
-          let txt = '';
-          files.forEach(f => {
-            txt += `\n---\nFILE: ${f.path}\n\n${f.content}\n`;
-          });
-          addMessage('AI', txt);
-          writeBtn.disabled = false;
-        }
-      } else {
-        addMessage('AI', 'No preview returned. ' + (data?.error || ''));
-      }
-    } catch (err) {
-      console.error(err);
-      addMessage('AI', 'Preview failed. See console for details.');
-    } finally {
-      previewBtn.disabled = false;
-    }
-  }
-
-  async function writePR() {
-    if (!lastPreview) return;
-    if (!confirm("Create PR with the proposed changes? This will create a new branch and open a PR on GitHub.")) return;
-
-    writeBtn.disabled = true;
-    addMessage('AI','Creating PR...');
-
-    try {
-      const resp = await fetch('/api/update', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ approve: true, files: lastPreview.files, prTitle: lastPreview.prTitle, prBody: lastPreview.prBody })
-      });
-      const data = await resp.json();
-      // remove last "Creating PR..." message
-      if (messagesEl.lastChild && messagesEl.lastChild.innerText.includes('Creating PR')) messagesEl.lastChild.remove();
-
-      if (data?.success && data.pr) {
-        addMessage('AI', `PR created: ${data.pr.html_url}`);
-        // Optionally open PR in new tab:
-        window.open(data.pr.html_url, '_blank');
-        // Reset preview
-        lastPreview = null;
-        writeBtn.disabled = true;
-      } else {
-        addMessage('AI', 'Failed to create PR: ' + (data?.error || JSON.stringify(data)));
-        writeBtn.disabled = false;
-      }
-    } catch (err) {
-      console.error(err);
-      addMessage('AI', 'Write failed. See console for details.');
-      writeBtn.disabled = false;
-    }
-  }
-
-  previewBtn.addEventListener('click', preview);
-  writeBtn.addEventListener('click', writePR);
-  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') preview(); });
-})();
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-    
+    <!-- Docsify script (make sure this is last) -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
   </body>
 </html>
