@@ -11,29 +11,31 @@
   /* --- Logo Header --- */
   body::before {
     content: "";
-    display: block;
     position: fixed;
     top: 20px;
     left: 0;
     width: 100%;
-    height: 70px; /* taller area for logo */
+    height: 70px;
     background: url('logo.png') no-repeat center top;
     background-size: 100px auto;
+    z-index: 9999;
   }
 
-  /* --- Push content down below logo --- */
-  #app {
-    margin-top: 400px !important; /* increase this if text still overlaps */
+  /* --- Push content down below header/logo --- */
+  #app,
+  .content,
+  .markdown-section {
+    margin-top: 420px !important; /* guaranteed clear space below logo */
   }
 
-  /* --- Clean print appearance --- */
+  /* --- Hide Docsify UI elements --- */
   .sidebar, .app-name, nav, .github-corner {
     display: none !important;
   }
 
   body {
-    background: #fff;
-    color: #000;
+    background: #fff !important;
+    color: #000 !important;
   }
 }
 </style>
