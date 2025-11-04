@@ -4,7 +4,6 @@
   * [Sandwiches](recipes/sandwich.md)
   * [Pastries](recipes/pastries.md)
 * Allergy Notes(allergies.md)
-  * [Gluten](allergies/gluten.md)
 * Checklists
   * [Opening](checklists/opening.md)
   * [Closing](checklists/closing.md)
