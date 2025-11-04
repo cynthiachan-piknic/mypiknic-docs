@@ -1,6 +1,6 @@
-# ☕ Café Documentation
+# Piknic Documents
 
-Welcome to our café's internal documentation!  
+Welcome to My Piknic's internal documentation.
 Use the sidebar to browse recipes, allergy notes, and checklists.
 
 ---
