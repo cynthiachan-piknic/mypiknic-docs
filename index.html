@@ -8,35 +8,36 @@
 <style>
 /* ---- PRINT STYLES ---- */
 @media print {
-  /* Add a header image on every printed page */
-  @page {
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
-
+  /* --- Logo Header --- */
   body::before {
     content: "";
     display: block;
     position: fixed;
-    top: 10px;
+    top: 20px;
     left: 0;
     width: 100%;
-    height: 60px;
-    background: url('logo.png') no-repeat center center;
+    height: 70px; /* taller area for logo */
+    background: url('logo.png') no-repeat center top;
     background-size: 100px auto;
   }
 
-  /* Adjust page content spacing */
+  /* --- Push content down below logo --- */
   #app {
-    margin-top: 10px;
+    margin-top: 300px !important; /* increase this if text still overlaps */
   }
-  
-  /* --- Push printed content lower to avoid overlap --- */
-  #app {
-    margin-top: 280px !important;
+
+  /* --- Clean print appearance --- */
+  .sidebar, .app-name, nav, .github-corner {
+    display: none !important;
   }
-  
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
 </style>
+
 
 
     
