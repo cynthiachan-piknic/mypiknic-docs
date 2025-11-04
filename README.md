@@ -1,6 +1,6 @@
 # My Piknic Cafe
 
-Welcome to My Piknic's internal documentation.
+Welcome to My Piknic's internal documentation. <br>
 Use the sidebar to browse recipes, allergy notes, and checklists.
 
 ---
