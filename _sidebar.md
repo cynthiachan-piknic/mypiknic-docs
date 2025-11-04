@@ -7,3 +7,4 @@
   * [Opening](checklists/opening.md)
   * [Closing](checklists/closing.md)
   * [Cleaning](checklists/cleaning.md)
+* [Excel](Recipe.json)
