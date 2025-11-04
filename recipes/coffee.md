@@ -1,27 +1,35 @@
 <img src="https://github.com/cynthiachan-piknic/mypiknic-docs/blob/f0f11d6112aca3cb60b1a9e22a765f01d5b6772a/logo.png" width="110">
 
-# ☕ Coffee Recipe
+# ☕ Traditional Coffees
 
-**Ingredients:**
-- Espresso beans — 18g  
-- Water — 36g  
+| HOT | Espresso  | Macchiato | Cortado | Cappuccino |
+| ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
+| Espresso | 2oz | 2oz | 2oz | 2oz |
+| Milk Foam | / | 1oz | 2oz | 10oz |
 
-**Steps:**
-1. Grind beans finely.
-2. Pull a double shot.
-3. Serve immediately.
+# ☕ White Coffees
 
-<div style="display: inline-block; width: 48%; vertical-align: top; margin-right: 2%;">
-    | Header 1A | Header 1B |
-    |---|---|
-    | Data 1A | Data 1B |
-    | Data 2A | Data 2B |
-</div>
-<div style="display: inline-block; width: 48%; vertical-align: top;">
-    | Header 2A | Header 2B |
-    |---|---|
-    | Data 3A | Data 3B |
-    | Data 4A | Data 4B |
-</div>
+| Left columns  | Right columns |
+| ------------- |:-------------:|
+| left foo      | right foo     |
+| left bar      | right bar     |
+| left baz      | right baz     |
 
-_Notes: Use local beans from supplier A._
+<table>
+  <tr>
+    <th>Drink</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td style="background-color: #c6efce;">Espresso</td>
+    <td style="background-color: #c6efce;">Ready</td>
+  </tr>
+  <tr>
+    <td style="background-color: #ffeb9c;">Latte</td>
+    <td style="background-color: #ffeb9c;">In Progress</td>
+  </tr>
+  <tr>
+    <td style="background-color: #ffc7ce;">Mocha</td>
+    <td style="background-color: #ffc7ce;">Needs Refill</td>
+  </tr>
+</table>
