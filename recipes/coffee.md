@@ -2,7 +2,7 @@
 
 # ☕ Traditional Coffees
 
-| HOT | Espresso  | Macchiato | Cortado | Cappuccino |
+| <span style="background-color:#ffc7ce;">HOT</span> | Espresso  | Macchiato | Cortado | Cappuccino |
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 | Espresso | 2oz | 2oz | 2oz | 2oz |
 | Milk Foam | / | 1oz | 2oz | 10oz |
