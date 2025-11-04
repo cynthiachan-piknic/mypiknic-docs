@@ -2,20 +2,25 @@
 
 # ☕ Traditional Coffees
 
-| <span style="background-color:#ffc7ce;">HOT</span> | Espresso  | Macchiato | Cortado | Cappuccino |
+| 🔴 HOT | Espresso  | Macchiato | Cortado | Cappuccino 🔴 |
 | ------------- |:-------------:|:-------------:|:-------------:|:-------------:|
 | Espresso | 2oz | 2oz | 2oz | 2oz |
-| Milk Foam | / | 1oz | 2oz | 10oz |
+| Milk Foam |  | 1oz | 2oz | 10oz |
 
 # ☕ White Coffees
 
-<table>
-<tbody>
-<tr>
-<td>123</td>
-<td>&nbsp;</td>
-<td>456</td>
-</tr>
-</tbody>
-</table>
+| 🔴 HOT | Flat White 🔴  |
+| ------------- |:-------------:|
+| Espresso | 2oz |
+| Steamed Milk | 6oz |
 
+| <span style="background-color:#ffc7ce;">HOT</span> | Cafe Misto (1:1)  |
+| ------------- |:-------------:|
+| Drip Coffee | 6oz |
+| Steamed Milk | 6oz |
+
+| 🔴 HOT | Latte 🔴 | 🔵 ICED | Latte 🔵 | 
+| ------------- |:-------------:| ------------- |:-------------:|
+| Espresso | 2oz | Ice | 100g (1/2 cup) |
+| Steamed Milk | 10oz | Milk | Fill and leave 0.5inch room |
+| | | Espresso | 2oz |
