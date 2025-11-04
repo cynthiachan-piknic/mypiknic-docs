@@ -1,4 +1,4 @@
-import Recipes from "https://github.com/cynthiachan-piknic/mypiknic-docs/blob/39c87ee1705d2a80c2033bc310bb1f79124ef3d2/Recipe.json";
+import Recipes from "Recipe.json";
 
 export default function RecipesPage() {
   return (
