@@ -1,4 +1,4 @@
-# Piknic Documents
+# My Piknic Cafe
 
 Welcome to My Piknic's internal documentation.
 Use the sidebar to browse recipes, allergy notes, and checklists.
