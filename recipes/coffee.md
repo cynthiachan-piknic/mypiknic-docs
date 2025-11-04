@@ -1,5 +1,3 @@
-<img src="https://raw.githubusercontent.com/cynthiachan-piknic/mypiknic-docs/main/logo.png" width="110">
-
 <i>↓ Recipe Steps</i>
 
 # ☕ Traditional Coffees
